@@ -21,4 +21,10 @@ export class CreateProductDto {
 
     @IsIn(['men', 'women', 'kid', 'unisex']) //se usa para enum
     gender: string;
+
+    @IsString({each:true}) @IsArray() @IsOptional()
+    tags: string[];
+    
+    @IsString({each:true}) @IsArray() @IsOptional()
+    images?: string[];
 }
