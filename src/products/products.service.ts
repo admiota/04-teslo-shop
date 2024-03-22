@@ -120,13 +120,6 @@ export class ProductsService {
     await this.productRepository.remove(product);
   }
 
-  private handleDBExceptions(error: any) {
-    if (error.code === '23505') throw new BadRequestException(error.detail);
-
-    this.logger.error(error);
-    throw new InternalServerErrorException('Unexpected error, check server logs')
-  }
-
   async deleteAllProducts() { //esto solo se utiliza en desarrollo antes de ejecutar la SEED
     const query = this.productRepository.createQueryBuilder('product');
     try {
@@ -134,5 +127,12 @@ export class ProductsService {
     } catch (error) {
       this.handleDBExceptions(error);
     }
+  }
+
+  private handleDBExceptions(error: any):never {
+    if (error.code === '23505') throw new BadRequestException(error.detail);
+
+    this.logger.error(error);
+    throw new InternalServerErrorException('Unexpected error, check server logs')
   }
 }
