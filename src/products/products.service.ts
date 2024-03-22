@@ -126,4 +126,13 @@ export class ProductsService {
     this.logger.error(error);
     throw new InternalServerErrorException('Unexpected error, check server logs')
   }
+
+  async deleteAllProducts() { //esto solo se utiliza en desarrollo antes de ejecutar la SEED
+    const query = this.productRepository.createQueryBuilder('product');
+    try {
+      return await query.delete().where({}).execute();
+    } catch (error) {
+      this.handleDBExceptions(error);
+    }
+  }
 }
