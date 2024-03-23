@@ -16,14 +16,16 @@ export class SeedService {
     return 'SEED EXECUTED';
   }
 
+  
+
   private async insertNewProducts() {
     await this.productsService.deleteAllProducts();
     const seedProducts = initialData.products;
     const insertPromises = [];
 
-    seedProducts.forEach(product => {
+    /*seedProducts.forEach(product => {
       insertPromises.push(this.productsService.create(product));
-    });
+    });*/
     await Promise.all(insertPromises);
     return true;
   }
