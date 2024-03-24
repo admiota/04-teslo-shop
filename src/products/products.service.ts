@@ -67,7 +67,7 @@ export class ProductsService {
           slug: term.toLowerCase()
         })
         .leftJoinAndSelect('prod.images', 'prodImages') //cuando usamos un queryBuilder para hacer búsquedas múltiples 
-                             //y tb queremos mostrar tablas externas tneemos que activar eso(ej para mostrar imagenes)
+                             //y tb queremos mostrar tablas externas tenemos que activar eso(ej para mostrar imagenes)
         .getOne();
     }
     if (!product) throw new NotFoundException(`Product with id ${term} not found`);
